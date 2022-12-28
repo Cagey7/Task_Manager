@@ -1,0 +1,53 @@
+{% extends "layout.html "%}
+{% block body %}
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8">
+                    <div class="mb-3 mt-3 text_mid">Hello, {{ personal_data[1] }} {{personal_data[2] }}. Here you can add new tasks and monitor your progress.</div>
+
+                    {% for task in task_data %}
+                    <form action="/" method="post">
+                        <div class="card border-info mb-3 mt-3 task_card">
+                            <div class="card-header">
+                                <p style="font-weight: 500;">{{ task[1] }}</p>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ task[2] }}</p>
+                                <button name="complete_task" type="submit" class="btn btn-info" value="{{ task['task_id'] }}">Task completed</button>
+                            </div>
+                        </div>
+                    </form>
+                    {% endfor %}
+
+                    <form action="/" method="post">
+                        <div class="mb-3 mt-5 text_mid">New task information</div>
+                    <div class="form-floating">
+                        <textarea name="task_name" class="form-control mt-3 mb-3" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Name of task</label>
+                      </div>
+                    <div class="form-floating mt-3 mb-3">
+                        <textarea name="task_info" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 120px"></textarea>
+                        <label for="floatingTextarea2">Task information</label>
+                    </div>
+                    <button name="new_task" type="submit" class="btn btn-info" value="new_task">Add task</button>
+                    </form>
+                </div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <form action="/remove" method="post">
+                        <button name="remove" type="submit" class="btn btn-danger" value="remove">Remove account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+
+{% endblock %}
